@@ -165,7 +165,7 @@ def display_summary(data, selected_month, selected_window):
 
     # Filter out rows with a total of 0
     summary_data = summary_data[summary_data['Total'] != 0]
-
+    summary_data
     # Save the summary_data DataFrame as an Excel file
     def convert_df(summary_data):
         return summary_data.to_csv(index=True).encode('utf-8')
