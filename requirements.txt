@@ -11,5 +11,4 @@ statsmodels
 xlrd
 streamlit_option_menu
 openpyxl
-sklearn.metrics.pairwise
-sklearn.feature_extraction.text
+scikit-learn==1.1.2
