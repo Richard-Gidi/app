@@ -9,3 +9,4 @@ openai
 datetime
 statsmodels
 xlrd
+streamlit_option_menu
