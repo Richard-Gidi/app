@@ -1,0 +1,11 @@
+matplotlib 
+pandas
+streamlit
+numpy
+seaborn
+plotly
+statsmodels
+openai
+datetime
+statsmodels
+xlrd
