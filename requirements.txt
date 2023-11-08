@@ -5,3 +5,4 @@ numpy
 seaborn
 plotly
 statsmodels
+xlrd
