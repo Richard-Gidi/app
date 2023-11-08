@@ -1,0 +1,9 @@
+matplotlib 
+pandas
+streamlit
+xlsxwriter
+numpy
+seaborn
+plotly
+statsmodels
+
