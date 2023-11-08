@@ -32,7 +32,7 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 # Set up OpenAI API credentials
-openai.api_key = st.secrets["auth_token"]
+openai.api_key = st.secrets["auth_key"]
 
 #!/usr/bin/env python
 # coding: utf-8
