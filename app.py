@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 from matplotlib import pyplot as plt
-import xlsxwriter
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
