@@ -11,6 +11,5 @@ statsmodels
 xlrd
 streamlit_option_menu
 openpyxl
-difflib
 sklearn.metrics.pairwise
 sklearn.feature_extraction.text
