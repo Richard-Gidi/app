@@ -11,7 +11,7 @@ def load_data():
 def preprocess_data(data):
     features = data['Producers'] + ' ' + data['Genres'] + ' ' + data['Studios'] + ' ' + \
                data['Themes'] + ' ' + data['Synopsis'] + ' ' + data['Rating'] + ' ' + \
-               data['Demographics'] + data['Japanese'] + ' ' + data['English']
+               data['Demographics'] + data['Japanese'] + ' ' + data['English'] + data['Title']
     return features
 
 def get_recommendations(anime_title, data, vectorized_features):
