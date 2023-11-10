@@ -43,7 +43,7 @@ def upload_file():
     uploaded_file = st.file_uploader("Choose a file")
     if uploaded_file is not None:
         data = pd.read_excel(uploaded_file, sheet_name=0, parse_dates=True, header=1)
-        data = data.drop(columns=['Unnamed: 5', 'Unnamed: 6'])
+        #data = data.drop(columns=['Unnamed: 5', 'Unnamed: 6'])
         data = data.dropna()
         return data
 
