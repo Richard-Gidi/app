@@ -95,7 +95,7 @@ def visualize_data(data):
             model_fit = model.fit()
 
             # Forecast future values
-            forecast = model_fit.get_forecast(steps=7, exog=exog_test)
+            forecast = model_fit.get_forecast(steps=15, exog=exog_test)
 
             # Extract the forecasted values and confidence intervals
             forecast_values = forecast.predicted_mean
