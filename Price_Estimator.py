@@ -79,8 +79,8 @@ def visualize_data(data):
         # Perform time series forecasting on selected_columns
         for column in selected_columns:
             # Split the data into train and test sets
-            train_data = data[column].iloc[:-7]
-            test_data = data[column].iloc[-7:]
+            train_data = data[column].iloc[:-15]
+            test_data = data[column].iloc[-15:]
 
             # Define exogenous variables if available
             exog_train = None  # Modify this with your exogenous variables for the training set
@@ -91,7 +91,7 @@ def visualize_data(data):
             test_data.index = pd.to_datetime(test_data.index)
 
             # Fit a SARIMA model
-            model = SARIMAX(train_data, order=(1, 0, 0), seasonal_order=(1, 0, 0, 7), exog=exog_train)
+            model = SARIMAX(train_data, order=(0, 0, 0), seasonal_order=(1, 0, 0, 12), exog=exog_train)
             model_fit = model.fit()
 
             # Forecast future values
