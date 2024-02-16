@@ -17,6 +17,7 @@ def upload_file():
                'LITERS PMS', 'LITERS AGO']
         data.columns = new
         data = data.drop(index=[0, 1])
+        data=data[:-1]
         data = data.fillna(0)
 
         # Create the data directory if it doesn't exist
