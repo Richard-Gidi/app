@@ -2,7 +2,33 @@ import pandas as pd
 import streamlit as st
 import os
 
+
 DATA_DIR = "data"
+
+
+
+# Define a password for authentication
+PASSWORD = "password123"
+
+# Define Streamlit's SessionState class
+class SessionState:
+    def __init__(self):
+        self.logged_in = False
+
+# Create an instance of SessionState
+session_state = SessionState()
+
+def login():
+    st.title("Login")
+    password = st.text_input("Password", type="password")
+    if password == PASSWORD:
+        session_state.logged_in = True
+        st.success("Logged in successfully.")
+    else:
+        st.error("Invalid password. Please try again.")
+
+
+
 
 def upload_file():
     uploaded_file = st.sidebar.file_uploader("Choose a file")
@@ -30,7 +56,9 @@ def upload_file():
 
         st.sidebar.success("Data uploaded and saved")
 
+        pass
         return data
+        
 
 def load_saved_data():
     filename = os.path.join(DATA_DIR, "uploaded_data.csv")
@@ -39,6 +67,8 @@ def load_saved_data():
         return data
     else:
         return None
+    
+        
 
 def calculate_day(data, selected_category, selected_station, goods_in_transit, git_dict):
     if data is None:
@@ -94,12 +124,14 @@ def calculate_day(data, selected_category, selected_station, goods_in_transit, g
     st.subheader(f"STOCK MONITORING TABLE - {selected_category}")
     st.table(filtered_data.reset_index(drop=True))  # Remove index column
 
+    pass
+
     return filtered_data
 
 def convert_df(filtered_data, git_dict):
     # Update GIT column with values from the dictionary
     filtered_data['GIT'] = filtered_data['OIL STATION'].map(git_dict)
-    
+    pass
     return filtered_data.to_csv(index=True).encode('utf-8')
 
 def main():
@@ -107,11 +139,11 @@ def main():
     data = upload_file()
 
     if data is None:
-       # Load saved data if it exists
+        # Load saved data if it exists
         data = load_saved_data()
 
     if data is not None:
-        category =st.sidebar.radio("Select category", ["AGO", "PMS"])
+        category = st.sidebar.radio("Select category", ["AGO", "PMS"])
 
         # Add input fields for station and goods in transit
         selected_station = st.sidebar.selectbox("Select Station", data["OIL STATION"])
@@ -130,14 +162,15 @@ def main():
         if st.sidebar.checkbox("Show Table"):
             filtered_data = calculate_day(data, category, selected_station, goods_in_transit, git_dict)
 
-        # Check if Goods in Transit is more than Qty Needed to be full
-        if selected_station:
-            qty_needed_to_be_full = filtered_data.loc[filtered_data['OIL STATION'] == selected_station, 'Qty Needed to be full'].values[0]
-            if goods_in_transit > qty_needed_to_be_full:
-                st.error("Goods in Transit cannot be more than Qty Needed to be full")
+            # Check if Goods in Transit is more than Qty Needed to be full
+            if selected_station:
+                qty_needed_to_be_full = filtered_data.loc[
+                    filtered_data['OIL STATION'] == selected_station, 'Qty Needed to be full'].values[0]
+                if goods_in_transit > qty_needed_to_be_full:
+                    st.error("Goods in Transit cannot be more than Qty Needed to be full")
 
-        csv = convert_df(filtered_data, git_dict)
-        st.download_button("Press to Download", csv, "file.csv", "text/csv", key='download-csv')
+            csv = convert_df(filtered_data, git_dict)
+            st.download_button("Press to Download", csv, "file.csv", "text/csv", key='download-csv')
 
 if __name__ == '__main__':
     main()
