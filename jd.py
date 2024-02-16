@@ -55,7 +55,7 @@ def calculate_day(data, selected_category, selected_station, goods_in_transit, g
     max_sales_column = f"MAX SALES {selected_category}"
     ullage_column = f"ULLAGE {selected_category}"
     tank_column = f"Tank {selected_category}"
-    avg_consumption=f"AV. CONSUMPTION {selected_category}"
+    avg_consumption = f"AV. CONSUMPTION {selected_category}"
 
     zero_mask = data[max_sales_column] == 0
     data.loc[zero_mask, max_sales_column] = 1
@@ -66,8 +66,8 @@ def calculate_day(data, selected_category, selected_station, goods_in_transit, g
     git_dict[selected_station] = goods_in_transit
 
     # Adjust current stock based on goods in transit
-    filtered_data['GIT'] = filtered_data['OIL STATION'].map(git_dict)
-    filtered_data.loc[filtered_data['OIL STATION'] == selected_station, 'Current Stock'] += goods_in_transit
+    for station in git_dict.keys():
+        filtered_data.loc[filtered_data['OIL STATION'] == station, 'Current Stock'] += git_dict[station]
 
     filtered_data['Days Left(max sales)'] = ((filtered_data['Current Stock'] - data[dead_stocks_column]) / data[max_sales_column]).apply(
         lambda x: max(0, round(x)))
@@ -98,6 +98,7 @@ def calculate_day(data, selected_category, selected_station, goods_in_transit, g
 def convert_df(filtered_data, git_dict):
     # Update GIT column with values from the dictionary
     filtered_data['GIT'] = filtered_data['OIL STATION'].map(git_dict)
+    
     return filtered_data.to_csv(index=True).encode('utf-8')
 
 def main():
