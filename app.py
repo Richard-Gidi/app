@@ -1,7 +1,8 @@
 import pandas as pd
 import streamlit as st
 from matplotlib import pyplot as plt
-st.set_option('deprecation.showPyplotGlobalUse', False)
+
+#st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 
